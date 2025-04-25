@@ -11,20 +11,15 @@
     ],
     "type": "library",
     "license": "MIT",
-    "autoload": {
-        "psr-4": {
-            "MBreuer\\PintPreset\\": "src/"
-        }
-    },
     "require": {
         "php": "^8.1",
         "laravel/pint": "^1.10"
     },
-    "extra": {
-        "laravel": {
-            "providers": []
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "authors": [
+        {
+            "name": "Marcel Breuer"
         }
-    },
-    "minimum-stability": "stable",
-    "prefer-stable": true
+    ]
 }
