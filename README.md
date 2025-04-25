@@ -1,34 +1,45 @@
-# Pint Preset
+# Pint Preset for Laravel Projects
 
-A default configuration preset for [Pint](https://laravel.com/docs/12.x/pint), the Laravel automatic code formatter.
+A reusable, opinionated formatting preset for [Laravel Pint](https://laravel.com/docs/12.x/pint), Laravel’s official PHP code style fixer.
 
-This preset provides a consistent, opinionated style guide for Laravel and PHP projects.  
-It can be easily reused across multiple repositories to ensure uniform formatting rules.
+This package provides a consistent style guide for Laravel and PHP projects, enabling uniform code standards across multiple repositories.
+
+## Features
+
+- Consistent and opinionated code style
+- Easy integration into any Laravel or PHP project
+- Centralized maintenance of formatting rules
+- Suitable for teams and individual developers
 
 ## Installation
 
-Add the preset to your project via Composer:
+Install the package via Composer:
 
-```
-composer require breuermarcel/pint-preset --dev
+```bash
+composer require m-breuer/pint-preset --dev
 ```
 
 ## Usage
 
-In your `pint.json` file, extend this preset:
+Configure Pint to use this preset by extending it in your `pint.json`:
 
-```
+```json
 {
-    "preset": "breuermarcel/pint-preset"
+  "preset": "m-breuer/pint-preset"
 }
 ```
 
-Then run Pint as usual:
+Then run Pint:
 
-```
+```bash
 ./vendor/bin/pint
 ```
 
+## Requirements
+
+- PHP 8.1 or higher
+- Laravel Pint 1.10 or higher
+
 ## License
 
-This project is open-sourced under the [MIT license](LICENSE).
+This package is open-sourced software licensed under the [MIT license](LICENSE).
