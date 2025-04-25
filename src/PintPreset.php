@@ -1,6 +1,6 @@
 <?php
 
-namespace Breuermarcel\PintPreset;
+namespace MBreuer\PintPreset;
 
 use Laravel\Pint\Preset\PresetInterface;
 

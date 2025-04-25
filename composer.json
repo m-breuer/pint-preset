@@ -1,11 +1,11 @@
 {
-    "name": "breuermarcel/pint-preset",
+    "name": "m-breuer/pint-preset",
     "description": "A default Pint configuration preset for Laravel and PHP projects.",
     "type": "library",
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Breuermarcel\\PintPreset\\": "src/"
+            "MBreuer\\PintPreset\\": "src/"
         }
     },
     "require": {
