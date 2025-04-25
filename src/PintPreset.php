@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Custom Laravel Pint preset providing opinionated coding standards.
+ */
+
 namespace MBreuer\PintPreset;
 
 use Laravel\Pint\Preset\PresetInterface;
@@ -25,7 +29,6 @@ class PintPreset implements PresetInterface
                 ],
                 'mb_str_functions' => true,
                 'modernize_types_casting' => true,
-                'new_with_parentheses' => false,
                 'no_empty_comment' => true,
                 'no_empty_phpdoc' => true,
                 'no_superfluous_elseif' => true,

@@ -1,6 +1,14 @@
 {
     "name": "m-breuer/pint-preset",
-    "description": "A default Pint configuration preset for Laravel and PHP projects.",
+    "description": "An opinionated Laravel Pint configuration preset for consistent PHP and Laravel project styling.",
+    "keywords": [
+        "laravel",
+        "pint",
+        "php-cs-fixer",
+        "code-style",
+        "formatter",
+        "preset"
+    ],
     "type": "library",
     "license": "MIT",
     "autoload": {
@@ -10,11 +18,13 @@
     },
     "require": {
         "php": "^8.1",
-        "laravel/pint": "^1.0"
+        "laravel/pint": "^1.10"
     },
     "extra": {
         "laravel": {
             "providers": []
         }
-    }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
 }
