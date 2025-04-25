@@ -21,19 +21,23 @@ composer require m-breuer/pint-preset --dev
 
 ## Usage
 
-Configure Pint to use this preset by extending it in your `pint.json`:
+To use this preset, point your project's `pint.json` to the configuration file in this package.
+
+### Example `pint.json`:
 
 ```json
 {
-  "preset": "m-breuer/pint-preset"
+  "config": "./vendor/m-breuer/pint-preset/pint.json"
 }
 ```
 
 Then run Pint:
 
 ```bash
-./vendor/bin/pint
+composer pint
 ```
+
+This allows your project to consume a centrally maintained Pint rule set.
 
 ## Requirements
 
