@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),  
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2025-12-27
+
+### Changed
+
+- Updated Pint rule set to better align with modern PHP standards.
+- Removed `declare_strict_types` to allow for more flexibility.
+- Added `backtick_to_shell_exec` to enforce consistent shell command execution.
+
 ## [1.0.3] - 2025-04-25
 
 ### Added
