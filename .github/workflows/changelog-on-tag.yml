@@ -1,0 +1,95 @@
+name: Update Changelog On Tag
+
+on:
+    push:
+        tags:
+            - 'v*'
+
+permissions:
+    contents: write
+
+jobs:
+    changelog:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
+
+            - name: Update changelog entry
+              env:
+                  TAG_NAME: ${{ github.ref_name }}
+              run: |
+                  set -euo pipefail
+
+                  VERSION="${TAG_NAME#v}"
+                  DATE="$(date -u +%Y-%m-%d)"
+
+                  if grep -q "^## \[${VERSION}\] - " CHANGELOG.md; then
+                    echo "Changelog already contains ${VERSION}; skipping."
+                    exit 0
+                  fi
+
+                  PREVIOUS_TAG="$(git tag --sort=-v:refname | grep -v "^${TAG_NAME}$" | head -n 1 || true)"
+
+                  if [ -n "${PREVIOUS_TAG}" ]; then
+                    COMMIT_RANGE="${PREVIOUS_TAG}..${TAG_NAME}"
+                  else
+                    COMMIT_RANGE="${TAG_NAME}"
+                  fi
+
+                  COMMITS="$(git log --pretty=format:'- %s' "${COMMIT_RANGE}")"
+                  if [ -z "${COMMITS}" ]; then
+                    COMMITS="- No changes recorded."
+                  fi
+
+                  ENTRY_FILE="$(mktemp)"
+                  {
+                    echo "## [${VERSION}] - ${DATE}"
+                    echo
+                    echo "### Changed"
+                    echo
+                    echo "${COMMITS}"
+                    echo
+                  } > "${ENTRY_FILE}"
+
+                  awk -v entry="${ENTRY_FILE}" '
+                    /^## \[/ && inserted == 0 {
+                      while ((getline line < entry) > 0) print line
+                      close(entry)
+                      inserted = 1
+                    }
+                    { print }
+                    END {
+                      if (inserted == 0) {
+                        while ((getline line < entry) > 0) print line
+                        close(entry)
+                      }
+                    }
+                  ' CHANGELOG.md > CHANGELOG.md.tmp
+
+                  mv CHANGELOG.md.tmp CHANGELOG.md
+
+            - name: Commit and push changelog
+              env:
+                  TAG_NAME: ${{ github.ref_name }}
+              run: |
+                  set -euo pipefail
+
+                  git config user.name "github-actions[bot]"
+                  git config user.email "github-actions[bot]@users.noreply.github.com"
+
+                  git fetch origin main
+                  git checkout main
+                  git pull --ff-only origin main
+
+                  if git diff --quiet CHANGELOG.md; then
+                    echo "No changelog changes to commit."
+                    exit 0
+                  fi
+
+                  git add CHANGELOG.md
+                  git commit -m "docs(changelog): update for ${TAG_NAME} [skip ci]"
+                  git push origin main
